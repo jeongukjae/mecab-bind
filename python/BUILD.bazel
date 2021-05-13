@@ -1,0 +1,15 @@
+package(default_visibility = ["//python:__pkg__"])
+
+sh_binary(
+    name = "move_ops",
+    srcs = ["move_ops.sh"],
+    data = ["//python/mecab:bind.so"],
+)
+
+py_test(
+    name = "test_mecab",
+    srcs = ["test_mecab.py"],
+    deps = ["//python/mecab:mecab"],
+    imports = ["."],
+    data = ["test-data"],
+)
