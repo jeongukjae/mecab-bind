@@ -74,17 +74,6 @@ else
   done
 fi
 
-while [[ "$TF_CUDA_VERSION" == "" ]]; do
-  read -p "Are you building against TensorFlow 2.1(including RCs) or newer?[Y/n] " INPUT
-  case $INPUT in
-    [Yy]* ) echo "Build against TensorFlow 2.1 or newer."; TF_CUDA_VERSION=10.1;;
-    [Nn]* ) echo "Build against TensorFlow <2.1."; TF_CUDA_VERSION=10.0;;
-    "" ) echo "Build against TensorFlow 2.1 or newer."; TF_CUDA_VERSION=10.1;;
-    * ) echo "Invalid selection: " $INPUT;;
-  esac
-done
-
-
 # CPU
 if [[ "$TF_NEED_CUDA" == "0" ]]; then
 
@@ -167,20 +156,19 @@ write_action_env_to_bazelrc "TF_SHARED_LIBRARY_DIR" ${SHARED_LIBRARY_DIR}
 write_action_env_to_bazelrc "TF_SHARED_LIBRARY_NAME" ${SHARED_LIBRARY_NAME}
 write_action_env_to_bazelrc "TF_NEED_CUDA" ${TF_NEED_CUDA}
 
-# TODO(yifeif): do not hardcode path
-if [[ "$TF_NEED_CUDA" == "1" ]]; then
-  write_action_env_to_bazelrc "TF_CUDA_VERSION" ${TF_CUDA_VERSION}
-  write_action_env_to_bazelrc "TF_CUDNN_VERSION" "7"
-  if is_windows; then
-    write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
-    write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
-  else
-    write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "/usr/lib/x86_64-linux-gnu"
-    write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "/usr/local/cuda"
-  fi
-  write_to_bazelrc "build --config=cuda"
-  write_to_bazelrc "test --config=cuda"
-fi
+# if [[ "$TF_NEED_CUDA" == "1" ]]; then
+#   write_action_env_to_bazelrc "TF_CUDA_VERSION" ${TF_CUDA_VERSION}
+#   write_action_env_to_bazelrc "TF_CUDNN_VERSION" "7"
+#   if is_windows; then
+#     write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
+#     write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
+#   else
+#     write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "/usr/lib/x86_64-linux-gnu"
+#     write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "/usr/local/cuda"
+#   fi
+#   write_to_bazelrc "build --config=cuda"
+#   write_to_bazelrc "test --config=cuda"
+# fi
 
 # remove bottom lines
 #
