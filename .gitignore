@@ -113,4 +113,9 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# will be generated using ./configure.sh
+.bazelrc
 /bazel-*
+
+.vscode/settings.json
+.vscode/c_cpp_properties.json

@@ -96,6 +96,7 @@ public:
         CHECK_MECAB_ERROR(tagger->parse(lattice));
 
         std::vector<std::vector<Node>> results;
+        // TODO NBEST SIZE
         for (int i = 0; i < 10; ++i) {
             const MeCab::Node* node = lattice->bos_node();
             CHECK_MECAB_ERROR(node);

@@ -2,6 +2,16 @@ workspace(name = "mecab-bind")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
+# Load rules_foreign_cc to build mecab
+http_archive(
+    name = "rules_foreign_cc",
+    sha256 = "d54742ffbdc6924f222d2179f0e10e911c5c659c4ae74158e9fe827aad862ac6",
+    strip_prefix = "rules_foreign_cc-0.2.0",
+    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/0.2.0.tar.gz",
+)
+load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
+rules_foreign_cc_dependencies()
+
 # Load pybind
 http_archive(
     name = "pybind11_bazel",
@@ -19,16 +29,7 @@ http_archive(
 load("@pybind11_bazel//:python_configure.bzl", "python_configure")
 python_configure(name = "local_config_python")
 
-# Load rules_foreign_cc to build mecab
-http_archive(
-    name = "rules_foreign_cc",
-    sha256 = "d54742ffbdc6924f222d2179f0e10e911c5c659c4ae74158e9fe827aad862ac6",
-    strip_prefix = "rules_foreign_cc-0.2.0",
-    url = "https://github.com/bazelbuild/rules_foreign_cc/archive/0.2.0.tar.gz",
-)
-load("@rules_foreign_cc//foreign_cc:repositories.bzl", "rules_foreign_cc_dependencies")
-rules_foreign_cc_dependencies()
-
+# mecab
 http_archive(
     name = "libmecab",
     urls = ["https://github.com/taku910/mecab/archive/046fa78b2ed56fbd4fac312040f6d62fc1bc31e3.tar.gz"],
@@ -36,3 +37,7 @@ http_archive(
     sha256 = "1c14f66ead753f80f6ff139f453ba9e5b79e7d267e81c4a51b669d354b48e851",
     build_file_content = """filegroup(name = "all_src", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
 )
+
+# Load TensorFlow
+load("//tf:tf_configure.bzl", "tf_configure")
+tf_configure(name = "local_config_tf")

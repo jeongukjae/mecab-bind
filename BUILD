@@ -9,3 +9,8 @@ configure_make(
     lib_source = "@libmecab//:all_src",
     out_static_libs = ["libmecab.a"],
 )
+
+filegroup(
+    name = "test-data",
+    srcs = glob(["test-data/**/*"]),
+)

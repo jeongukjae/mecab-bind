@@ -11,5 +11,5 @@ py_test(
     srcs = ["test_mecab.py"],
     deps = ["//python/mecab:mecab"],
     imports = ["."],
-    data = ["test-data"],
+    data = ["//:test-data"],
 )
