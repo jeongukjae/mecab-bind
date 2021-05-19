@@ -1,3 +1,5 @@
+"""MeCab Tagger for string tensors"""
+
 import tensorflow as tf
 from tensorflow.python.framework import ops
 from tensorflow.python.framework import load_library
@@ -22,12 +24,32 @@ class _MecabModelResource(tracking.TrackableResource):
 
 
 class MecabTagger(tf.Module):
+    """
+    MeCab Tagger
+
+    Note: If you use this Module in SavedModel format, it is recommended to use model_path as absolute path.
+    The `model_path` is serialized, not the dictionary data.
+    """
+
     def __init__(self, model_path, name=None, **kwargs):
+        """Initialize MeCab Tagger
+
+        Args:
+            model_path: MeCab dictionary path.(`dicdir` option in MeCab)
+        """
         super().__init__(name=name, **kwargs)
 
         self.model_resource = _MecabModelResource(model_path, name)
 
     def tag(self, input_sentence, name=None):
+        """Tag a string tensor.
+
+        Args:
+            input_sentence: The tensor to tokenize
+            name: The name for this op, optional.
+        Returns:
+            Tuple of RaggedTensors of surfaces and features.
+        """
         with ops.name_scope("MecabTag"):
             input_tensor = ragged_tensor.convert_to_tensor_or_ragged_tensor(input_sentence)
             if input_tensor.shape.ndims is None:
