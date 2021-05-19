@@ -120,7 +120,7 @@ dmypy.json
 /.vscode/settings.json
 /.vscode/c_cpp_properties.json
 
-/python/mecab/mecab.h
+/python/mecab/include/
 /python/mecab/libmecab.2.dylib
 /python/mecab/libmecab.so.2
 /python/mecab/libmecab.a
