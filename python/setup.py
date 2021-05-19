@@ -17,7 +17,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'),
 
 setup(
     name="mecab-bind",
-    version="0.996.0a0",
+    version="0.996.0a1",
     python_requires=">=3.6",
     packages=["mecab"],
     package_data={"mecab": ["bind.pyi", "bind.so"]},
