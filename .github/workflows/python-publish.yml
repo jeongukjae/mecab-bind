@@ -10,7 +10,7 @@ jobs:
     env:
       BAZEL_VERSION: 4.0.0
       TENSORFLOW_VERSION: 2.4.1
-      MACOSX_DEPLOYMENT_TARGET: "10.12"
+      MACOSX_DEPLOYMENT_TARGET: "10.14"
 
     strategy:
       fail-fast: false
