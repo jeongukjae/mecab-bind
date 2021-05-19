@@ -71,15 +71,11 @@ function main() {
 
   cp ${PIP_FILE_PREFIX}python/setup.py "${TMPDIR}"
   rsync -avm -L --exclude='*_test.py' ${PIP_FILE_PREFIX}python/mecab "${TMPDIR}"
-  # copy libmecab
-  mkdir -p "${TMPDIR}/mecab/include"
-  cp ${LIBMECAB_PREFIX}include/mecab.h "${TMPDIR}/mecab/include/mecab.h"
-  cp ${LIBMECAB_PREFIX}lib/* "${TMPDIR}/mecab/"
 
   pushd ${TMPDIR}
   echo $(date) : "=== Building wheel"
 
-  python3 setup.py bdist_wheel > /dev/null
+  python3 setup.py bdist_wheel
 
   cp dist/*.whl "${DEST}"
   popd

@@ -7,18 +7,11 @@ pybind_extension(
     name = "bind",
     srcs = ["bind.cpp"],
     deps = ["//:libmecab"],
-    linkopts = select({
-        "//:osx": [],
-        "//conditions:default": ["-Wl,-rpath='$$ORIGIN'"],
-    })
 )
 
 py_library(
     name = "mecab",
-    srcs = [
-        "__init__.py",
-        "c.py",
-    ],
+    srcs = ["__init__.py"],
     data = [":bind.so"],
 )
 

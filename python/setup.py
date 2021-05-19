@@ -1,8 +1,10 @@
 import os
 from setuptools import setup, Extension
 
+# https://stackoverflow.com/questions/45150304/how-to-force-a-python-wheel-to-be-platform-specific-when-building-it
 try:
     from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
+
     class bdist_wheel(_bdist_wheel):
         def finalize_options(self):
             _bdist_wheel.finalize_options(self)
@@ -15,9 +17,7 @@ setup(
     version="0.996.0a0",
     python_requires=">=3.6",
     packages=["mecab"],
-    package_data={
-        "mecab": ["bind.so", "bind.pyi", "libmecab.a", "libmecab.so.2", "include/*"]
-    },
+    package_data={"mecab": ["bind.so", "bind.pyi"]},
     url="https://github.com/jeongukjae/python-bind",
     author="Jeong Ukjae",
     author_email="jeongukjae@gmail.com",

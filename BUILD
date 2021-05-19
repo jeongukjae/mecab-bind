@@ -11,18 +11,13 @@ config_setting(
 # http://taku910.github.io/mecab/#install
 configure_make(
     name = "libmecab",
-    configure_env_vars = {"AR": "/usr/bin/ar"},
+    configure_env_vars = select({
+        ":osx": {"AR": "/usr/bin/ar"},
+        "//conditions:default": {"AR": "/usr/bin/ar", "CC": "gcc -fPIC", "CXX": "gcc -fPIC"},
+    }),
+    make_commands = ["make -j3", "make install"],
     lib_source = "@libmecab//:all_src",
-    out_static_libs = select({
-        ":osx": ["libmecab.a"],
-        "//conditions:default": [],
-    }),
-    # TODO: Building libmecab as a static library in Linux raises error like `recompile with -fPIC`.
-    # I want to build libmecab as a static library in all platforms.
-    out_shared_libs = select({
-        ":osx": [],
-        "//conditions:default": ["libmecab.so.2"],
-    }),
+    out_static_libs = ["libmecab.a"],
 )
 
 filegroup(

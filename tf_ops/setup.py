@@ -1,6 +1,7 @@
 import os
 from setuptools import setup, find_packages
 
+# https://stackoverflow.com/questions/45150304/how-to-force-a-python-wheel-to-be-platform-specific-when-building-it
 try:
     from wheel.bdist_wheel import bdist_wheel as _bdist_wheel
 

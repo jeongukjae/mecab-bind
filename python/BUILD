@@ -3,7 +3,6 @@ sh_binary(
     srcs = ["build_pip_pkg.sh"],
     data = [
         "setup.py",
-        "//:libmecab",
         "//python/mecab:mecab",
     ],
 )

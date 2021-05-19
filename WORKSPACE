@@ -27,7 +27,7 @@ http_archive(
     urls = ["https://github.com/pybind/pybind11/archive/v2.6.2.tar.gz"],
 )
 load("@pybind11_bazel//:python_configure.bzl", "python_configure")
-python_configure(name = "local_config_python")
+python_configure(name = "local_config_python", python_version = "3")
 
 # mecab
 http_archive(
@@ -39,5 +39,5 @@ http_archive(
 )
 
 # Load TensorFlow
-load("//tf:tf_configure.bzl", "tf_configure")
+load("//third_party/tf:tf_configure.bzl", "tf_configure")
 tf_configure(name = "local_config_tf")
