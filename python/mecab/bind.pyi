@@ -1,7 +1,5 @@
 from typing import List
 
-__version__: str = ...
-
 def get_model_args(dic_path: str) -> str: ...
 
 class DictionaryInfo:

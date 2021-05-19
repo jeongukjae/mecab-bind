@@ -13,6 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 # ==============================================================================
+
+#
+# I modified this script not to use CUDA settings for this project.
+#
 PLATFORM="$(uname -s | tr 'A-Z' 'a-z')"
 PIP="pip3"
 
@@ -45,18 +49,6 @@ function is_ppc64le() {
 # Remove .bazelrc if it already exist
 [ -e .bazelrc ] && rm .bazelrc
 
-# Check if we are building GPU or CPU ops, default CPU
-while [[ "$TF_NEED_CUDA" == "" ]]; do
-  read -p "Do you want to build ops again TensorFlow CPU pip package?"\
-" Y or enter for CPU (tensorflow-cpu), N for GPU (tensorflow). [Y/n] " INPUT
-  case $INPUT in
-    [Yy]* ) echo "Build with CPU pip package."; TF_NEED_CUDA=0;;
-    [Nn]* ) echo "Build with GPU pip package."; TF_NEED_CUDA=1;;
-    "" ) echo "Build with CPU pip package."; TF_NEED_CUDA=0;;
-    * ) echo "Invalid selection: " $INPUT;;
-  esac
-done
-
 # Check if we are building against manylinux1 or manylinux2010 pip package,
 # default manylinux2010
 if is_windows; then
@@ -74,44 +66,21 @@ else
   done
 fi
 
-# CPU
-if [[ "$TF_NEED_CUDA" == "0" ]]; then
-
-  # Check if it's installed
-  if [[ $(${PIP} show tensorflow-cpu) == *tensorflow-cpu* ]] || [[ $(${PIP} show tf-nightly-cpu) == *tf-nightly-cpu* ]] ; then
-    echo 'Using installed tensorflow'
-  else
-    # Uninstall GPU version if it is installed.
-    if [[ $(${PIP} show tensorflow) == *tensorflow* ]]; then
-      echo 'Already have gpu version of tensorflow installed. Uninstalling......\n'
-      ${PIP} uninstall tensorflow
-    elif [[ $(${PIP} show tf-nightly) == *tf-nightly* ]]; then
-      echo 'Already have gpu version of tensorflow installed. Uninstalling......\n'
-      ${PIP} uninstall tf-nightly
-    fi
-    # Install CPU version
-    echo 'Installing tensorflow-cpu......\n'
-    ${PIP} install tensorflow-cpu
-  fi
-
+# Check if it's installed
+if [[ $(${PIP} show tensorflow-cpu) == *tensorflow-cpu* ]] || [[ $(${PIP} show tf-nightly-cpu) == *tf-nightly-cpu* ]] ; then
+  echo 'Using installed tensorflow'
 else
-
-  # Check if it's installed
-   if [[ $(${PIP} show tensorflow) == *tensorflow* ]] || [[ $(${PIP} show tf-nightly) == *tf-nightly* ]]; then
-    echo 'Using installed tensorflow'
-  else
-    # Uninstall CPU version if it is installed.
-    if [[ $(${PIP} show tensorflow-cpu) == *tensorflow-cpu* ]]; then
-      echo 'Already have tensorflow non-gpu installed. Uninstalling......\n'
-      ${PIP} uninstall tensorflow
-    elif [[ $(${PIP} show tf-nightly-cpu) == *tf-nightly-cpu* ]]; then
-      echo 'Already have tensorflow non-gpu installed. Uninstalling......\n'
-      ${PIP} uninstall tf-nightly
-    fi
-    # Install GPU version
-    echo 'Installing tensorflow .....\n'
-    ${PIP} install tensorflow
+  # Uninstall GPU version if it is installed.
+  if [[ $(${PIP} show tensorflow) == *tensorflow* ]]; then
+    echo 'Already have gpu version of tensorflow installed. Uninstalling......\n'
+    ${PIP} uninstall tensorflow
+  elif [[ $(${PIP} show tf-nightly) == *tf-nightly* ]]; then
+    echo 'Already have gpu version of tensorflow installed. Uninstalling......\n'
+    ${PIP} uninstall tf-nightly
   fi
+  # Install CPU version
+  echo 'Installing tensorflow-cpu......\n'
+  ${PIP} install tensorflow-cpu
 fi
 
 
@@ -154,30 +123,4 @@ fi
 write_action_env_to_bazelrc "TF_HEADER_DIR" ${HEADER_DIR}
 write_action_env_to_bazelrc "TF_SHARED_LIBRARY_DIR" ${SHARED_LIBRARY_DIR}
 write_action_env_to_bazelrc "TF_SHARED_LIBRARY_NAME" ${SHARED_LIBRARY_NAME}
-write_action_env_to_bazelrc "TF_NEED_CUDA" ${TF_NEED_CUDA}
-
-# if [[ "$TF_NEED_CUDA" == "1" ]]; then
-#   write_action_env_to_bazelrc "TF_CUDA_VERSION" ${TF_CUDA_VERSION}
-#   write_action_env_to_bazelrc "TF_CUDNN_VERSION" "7"
-#   if is_windows; then
-#     write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
-#     write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v${TF_CUDA_VERSION}"
-#   else
-#     write_action_env_to_bazelrc "CUDNN_INSTALL_PATH" "/usr/lib/x86_64-linux-gnu"
-#     write_action_env_to_bazelrc "CUDA_TOOLKIT_PATH" "/usr/local/cuda"
-#   fi
-#   write_to_bazelrc "build --config=cuda"
-#   write_to_bazelrc "test --config=cuda"
-# fi
-
-# remove bottom lines
-#
-# if [[ "$PIP_MANYLINUX2010" == "1" ]]; then
-#   if [[ "$TF_CUDA_VERSION" == "10.0" ]]; then
-#     write_to_bazelrc "build --config=manylinux2010cuda100"
-#     write_to_bazelrc "test --config=manylinux2010cuda100"
-#   else
-#     write_to_bazelrc "build --config=manylinux2010cuda101"
-#     write_to_bazelrc "test --config=manylinux2010cuda101"
-#   fi
-# fi
+write_action_env_to_bazelrc "TF_NEED_CUDA" "0"
