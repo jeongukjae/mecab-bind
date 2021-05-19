@@ -36,11 +36,28 @@ jobs:
         pip install tensorflow-cpu==${TENSORFLOW_VERSION}
     - name: Set up workspace
       run: PIP_MANYLINUX2010=1 ./tf_configure.sh
+
     - name: Build and test python binding
       run: |
-        bazel build -s //python:mecab_test --verbose_failures
-        ./bazel-bin/python/mecab_test
+        bazel build -s //python/mecab:test_mecab --verbose_failures
+        ./bazel-bin/python/mecab/test_mecab
     - name: Build and test tensorflow binding
-      run:
+      run: |
         bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
         ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test
+
+    - name: Build python binding pip pkg and test
+      run: |
+        bazel clean
+        bazel build -s //python:build_pip_pkg --verbose_failures
+        ./bazel-bin/python/build_pip_pkg artifacts
+        pip install artifacts/mecab_bind-*
+        python -c 'import mecab'
+
+    - name: Build tensorflow binding pip pkg and test
+      run: |
+        bazel clean
+        bazel build -s //tf_ops:build_pip_pkg --verbose_failures
+        ./bazel-bin/tf_ops/build_pip_pkg artifacts
+        pip install artifacts/mecab_bind-*
+        python -c 'import mecab_tf'

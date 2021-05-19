@@ -1,4 +1,4 @@
-package(default_visibility = ["//python:__pkg__"])
+package(default_visibility = ["//visibility:public"])
 load("@pybind11_bazel//:build_defs.bzl", "pybind_extension")
 
 # set rpath in linux
@@ -20,4 +20,16 @@ py_library(
         "c.py",
     ],
     data = [":bind.so"],
+)
+
+py_test(
+    name = "test_mecab",
+    srcs = ["test_mecab.py"],
+    deps = ["//python/mecab:mecab"],
+    data = [
+        "//python/mecab:bind.so",
+        "//:libmecab",
+        "//:test-data",
+    ],
+    imports = [".."],
 )
