@@ -18,7 +18,7 @@ configure_make(
         "//conditions:default": [],
     }),
     # TODO: Building libmecab as a static library in Linux raises error like `recompile with -fPIC`.
-    # I want to build libmecab as a static library in all platform.
+    # I want to build libmecab as a static library in all platforms.
     out_shared_libs = select({
         ":osx": [],
         "//conditions:default": ["libmecab.so.2"],
