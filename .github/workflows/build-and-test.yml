@@ -38,7 +38,9 @@ jobs:
       run: PIP_MANYLINUX2010=1 ./tf_configure.sh
     - name: Build and test python binding
       run: |
-        bazel run -s //python:move_ops --verbose_failures
-        bazel run -s //python:mecab_test --verbose_failures
+        bazel build -s //python:mecab_test --verbose_failures
+        ./bazel-bin/python/mecab_test
     - name: Build and test tensorflow binding
-      run: bazel run -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
+      run:
+        bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
+        ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test

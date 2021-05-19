@@ -25,6 +25,11 @@ cc_binary(
         ":windows": ["/DEIGEN_STRONG_INLINE=inline", "-DTENSORFLOW_MONOLITHIC_BUILD", "/DPLATFORM_WINDOWS", "/DEIGEN_HAS_C99_MATH", "/DTENSORFLOW_USE_EIGEN_THREADPOOL", "/DEIGEN_AVOID_STL_ARRAY", "/Iexternal/gemmlowp", "/wd4018", "/wd4577", "/DNOGDI", "/UTF_COMPILE_LIBRARY"],
         "//conditions:default": ["-pthread", "-std=c++11", "-D_GLIBCXX_USE_CXX11_ABI=0"],
     }),
+    linkopts = select({
+        "//:osx": [],
+        ":windows": [],
+        "//conditions:default": ["-Wl,-rpath='$$ORIGIN'"],
+    })
 )
 
 py_library(
@@ -33,7 +38,8 @@ py_library(
         "python/ops/mecab_ops.py",
     ]),
     data = [
-        ":python/ops/_mecab_ops.so"
+        ":python/ops/_mecab_ops.so",
+        "//:libmecab",
     ],
     srcs_version = "PY2AND3",
 )

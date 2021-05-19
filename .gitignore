@@ -124,3 +124,4 @@ dmypy.json
 /python/mecab/libmecab.2.dylib
 /python/mecab/libmecab.so.2
 /python/mecab/libmecab.a
+/artifacts
