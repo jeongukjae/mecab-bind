@@ -12,13 +12,18 @@ try:
 except ImportError:
     bdist_wheel = None
 
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name="mecab-bind",
     version="0.996.0a0",
     python_requires=">=3.6",
     packages=["mecab"],
-    package_data={"mecab": ["bind.so", "bind.pyi"]},
+    package_data={"mecab": ["bind.pyi", "bind.so"]},
     url="https://github.com/jeongukjae/python-bind",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author="Jeong Ukjae",
     author_email="jeongukjae@gmail.com",
     cmdclass={"bdist_wheel": bdist_wheel},

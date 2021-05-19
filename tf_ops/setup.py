@@ -12,6 +12,9 @@ try:
 except ImportError:
     bdist_wheel = None
 
+with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name="mecab-tf",
     version="0.996.0a0",
@@ -19,6 +22,8 @@ setup(
     packages=find_packages(),
     package_data={"mecab_tf.python.ops": ["_mecab_ops.so", "libmecab.so.2"]},
     url="https://github.com/jeongukjae/python-bind",
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     author="Jeong Ukjae",
     author_email="jeongukjae@gmail.com",
     cmdclass={"bdist_wheel": bdist_wheel},

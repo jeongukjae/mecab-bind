@@ -70,6 +70,8 @@ function main() {
   echo "=== Copy Python binding files"
 
   cp ${PIP_FILE_PREFIX}python/setup.py "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}python/LICENSE "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}python/README.md "${TMPDIR}"
   rsync -avm -L --exclude='*_test.py' ${PIP_FILE_PREFIX}python/mecab "${TMPDIR}"
 
   pushd ${TMPDIR}
