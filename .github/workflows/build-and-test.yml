@@ -48,6 +48,7 @@ jobs:
       run: |
         bazel build -s //python/mecab:test_mecab --verbose_failures
         ./bazel-bin/python/mecab/test_mecab
+
     - name: Build and test tensorflow binding
       run: |
         bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures

@@ -13,7 +13,7 @@ except ImportError:
 
 setup(
     name="mecab-tf",
-    version="0.996.0",
+    version="0.996.0a0",
     python_requires=">=3.6",
     packages=find_packages(),
     package_data={"mecab_tf.python.ops": ["_mecab_ops.so", "libmecab.so.2"]},

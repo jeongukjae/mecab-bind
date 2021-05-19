@@ -12,10 +12,12 @@ except ImportError:
 
 setup(
     name="mecab-bind",
-    version="0.996.0",
+    version="0.996.0a0",
     python_requires=">=3.6",
     packages=["mecab"],
-    package_data={"mecab": ["bind.so", "bind.pyi", "libmecab.a", "libmecab.so.2"]},
+    package_data={
+        "mecab": ["bind.so", "bind.pyi", "libmecab.a", "libmecab.so.2", "include/*"]
+    },
     url="https://github.com/jeongukjae/python-bind",
     author="Jeong Ukjae",
     author_email="jeongukjae@gmail.com",
