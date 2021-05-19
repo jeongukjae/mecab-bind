@@ -53,18 +53,14 @@ jobs:
         bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
         ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test
 
-    - name: Build python binding pip pkg and test
+    - name: Build python binding pip pkg
       run: |
         bazel clean
         bazel build -s //python:build_pip_pkg --verbose_failures
         ./bazel-bin/python/build_pip_pkg artifacts
-        pip install artifacts/mecab_bind-*
-        python -c 'import mecab'
 
-    - name: Build tensorflow binding pip pkg and test
+    - name: Build tensorflow binding pip pkg
       run: |
         bazel clean
         bazel build -s //tf_ops:build_pip_pkg --verbose_failures
         ./bazel-bin/tf_ops/build_pip_pkg artifacts
-        pip install artifacts/mecab_tf-*
-        python -c 'import mecab_tf'
