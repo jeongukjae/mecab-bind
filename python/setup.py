@@ -1,5 +1,5 @@
 import os
-from setuptools import setup, Extension
+from setuptools import setup, find_packages
 
 # https://stackoverflow.com/questions/45150304/how-to-force-a-python-wheel-to-be-platform-specific-when-building-it
 try:
@@ -19,8 +19,21 @@ setup(
     name="mecab-bind",
     version="0.996.0a1",
     python_requires=">=3.6",
-    packages=["mecab"],
-    package_data={"mecab": ["bind.pyi", "bind.so"]},
+    packages=find_packages(),
+    package_data={
+        "mecab": ["bind.pyi", "bind.so"],
+        "mecab.bin": ["mecab-dict-index", "mecab-dict-gen", "mecab-system-eval", "mecab-cost-train", "mecab-test-gen", "mecab"],
+    },
+    entry_points = {
+        'console_scripts': [
+            'mecab-dict-index=mecab.bin.cli_main:mecab_dict_index_main',
+            'mecab-dict-gen=mecab.bin.cli_main:mecab_dict_gen_main',
+            'mecab-system-eval=mecab.bin.cli_main:mecab_system_eval_main',
+            'mecab-cost-train=mecab.bin.cli_main:mecab_cost_train_main',
+            'mecab-test-gen=mecab.bin.cli_main:mecab_test_gen_main',
+            'mecab=mecab.bin.cli_main:mecab_main',
+        ],
+    },
     url="https://github.com/jeongukjae/python-bind",
     long_description=long_description,
     long_description_content_type='text/markdown',

@@ -6,6 +6,5 @@ sh_binary(
         "LICENSE",
         "README.md",
         "//python/mecab:mecab",
-        "//python/mecab:bind.so",
     ],
 )

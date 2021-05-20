@@ -12,7 +12,10 @@ pybind_extension(
 py_library(
     name = "mecab",
     srcs = ["__init__.py"],
-    data = [":bind.so"],
+    data = [
+        ":bind.so",
+        "//python/mecab/bin:bin",
+    ],
 )
 
 py_test(

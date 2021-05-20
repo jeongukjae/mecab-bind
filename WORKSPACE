@@ -35,7 +35,17 @@ http_archive(
     urls = ["https://github.com/taku910/mecab/archive/046fa78b2ed56fbd4fac312040f6d62fc1bc31e3.tar.gz"],
     strip_prefix = "mecab-046fa78b2ed56fbd4fac312040f6d62fc1bc31e3/mecab",
     sha256 = "1c14f66ead753f80f6ff139f453ba9e5b79e7d267e81c4a51b669d354b48e851",
-    build_file_content = """filegroup(name = "all_src", srcs = glob(["**"]), visibility = ["//visibility:public"])"""
+    build_file_content = """
+filegroup(name = "all_src", srcs = glob(["**"]), visibility = ["//visibility:public"])
+
+# clis
+filegroup(name = "mecab_dict_index", srcs = ["src/mecab-dict-index.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+filegroup(name = "mecab_dict_gen", srcs = ["src/mecab-dict-gen.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+filegroup(name = "mecab_system_eval", srcs = ["src/mecab-system-eval.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+filegroup(name = "mecab_cost_train", srcs = ["src/mecab-cost-train.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+filegroup(name = "mecab_test_gen", srcs = ["src/mecab-test-gen.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+filegroup(name = "mecab", srcs = ["src/mecab.cpp", "src/winmain.h"], visibility = ["//visibility:public"])
+"""
 )
 
 # Load TensorFlow

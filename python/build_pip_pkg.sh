@@ -72,7 +72,7 @@ function main() {
   cp ${PIP_FILE_PREFIX}python/setup.py "${TMPDIR}"
   cp ${PIP_FILE_PREFIX}python/LICENSE "${TMPDIR}"
   cp ${PIP_FILE_PREFIX}python/README.md "${TMPDIR}"
-  rsync -avm -L --exclude='*_test.py' ${PIP_FILE_PREFIX}python/mecab "${TMPDIR}"
+  rsync -avm -L --exclude='test_*.py' ${PIP_FILE_PREFIX}python/mecab "${TMPDIR}"
 
   pushd ${TMPDIR}
   echo $(date) : "=== Building wheel"

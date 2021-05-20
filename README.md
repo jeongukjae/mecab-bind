@@ -70,6 +70,15 @@ EOS
 
 ```
 
+Bound commands
+
+* `mecab-dict-index`
+* `mecab-dict-gen`
+* `mecab-system-eval`
+* `mecab-cost-train`
+* `mecab-test-gen`
+* `mecab`
+
 ### TensorFlow Binding
 
 ```python
@@ -79,6 +88,10 @@ EOS
 2021-05-20 05:35:48.759933: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX2 FMA
 To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
 >>> surfaces, features = tagger.tag(["シリーズ中、カンフーシーンが一番多い。", "※撮影中に、ジェット・リーが失踪。"])
+>>> surfaces.shape
+TensorShape([2, None])
+>>> features.shape
+TensorShape([2, None])
 >>> for surface, feature in zip(surfaces[0], features[0]):  # print first sentence
 ...     print(surface.numpy().decode('utf8'), feature.numpy().decode('utf8'))
 ...
