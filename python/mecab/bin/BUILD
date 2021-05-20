@@ -11,11 +11,11 @@ py_library(
     name = 'bin',
     srcs = ['__init__.py', 'cli_main.py'],
     data = [
-        "mecab-dict-index",
-        "mecab-dict-gen",
-        "mecab-system-eval",
-        "mecab-cost-train",
-        "mecab-test-gen",
-        "mecab",
+        ":mecab-dict-index",
+        ":mecab-dict-gen",
+        ":mecab-system-eval",
+        ":mecab-cost-train",
+        ":mecab-test-gen",
+        ":mecab",
     ]
 )
