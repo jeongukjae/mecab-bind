@@ -5,6 +5,7 @@ sh_binary(
         "setup.py",
         "LICENSE",
         "README.md",
+        "MANIFEST.in",
         "//python/mecab:mecab",
     ],
 )

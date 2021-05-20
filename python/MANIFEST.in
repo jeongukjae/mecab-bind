@@ -1,0 +1,3 @@
+recursive-include mecab *.so
+recursive-include mecab *.pyi
+recursive-include mecab/bin *

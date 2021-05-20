@@ -40,7 +40,7 @@ jobs:
         pip install tensorflow-cpu==${TENSORFLOW_VERSION}
         pip install setuptools wheel twine
     - name: Set up workspace
-      run: PIP_MANYLINUX2010=1 ./tf_configure.sh
+      run: ./tf_configure.sh
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}

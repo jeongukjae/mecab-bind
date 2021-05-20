@@ -44,7 +44,7 @@ jobs:
         pip3 install tensorflow-cpu==${TENSORFLOW_VERSION}
 
     - name: Set up workspace
-      run: PIP_MANYLINUX2010=1 ./tf_configure.sh
+      run: ./tf_configure.sh
 
     - name: Build and test python binding
       run: |

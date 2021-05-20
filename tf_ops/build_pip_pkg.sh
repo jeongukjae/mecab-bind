@@ -67,6 +67,7 @@ function main() {
   cp ${PIP_FILE_PREFIX}tf_ops/setup.py "${TMPDIR}"
   cp ${PIP_FILE_PREFIX}tf_ops/LICENSE "${TMPDIR}"
   cp ${PIP_FILE_PREFIX}tf_ops/README.md "${TMPDIR}"
+  cp ${PIP_FILE_PREFIX}tf_ops/MANIFEST.in "${TMPDIR}"
   rsync -avm -L --exclude='*_test.py' ${PIP_FILE_PREFIX}tf_ops/mecab_tf "${TMPDIR}"
 
   # copy libmecab.so.2 if linux

@@ -5,6 +5,7 @@ sh_binary(
         "setup.py",
         "LICENSE",
         "README.md",
+        "MANIFEST.in",
         "//tf_ops/mecab_tf:mecab_py",
         "//:libmecab",
     ],
