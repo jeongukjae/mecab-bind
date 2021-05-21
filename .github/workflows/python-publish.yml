@@ -17,6 +17,11 @@ jobs:
       TENSORFLOW_VERSION: 2.4.1
       BAZEL_TARGET: linux
 
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
     steps:
     - uses: actions/checkout@v2
     - name: Set up bazel
@@ -27,15 +32,14 @@ jobs:
         rm bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh
     - name: Install deps
       run: |
-        python3.8 -m pip install --upgrade pip
-        pip3.8 install twine
+        python${{ matrix.python-version }} -m pip install --upgrade pip
+        pip${{ matrix.python-version }} install twine
         yum install -y patchelf rsync
     - name: Build wheel
       run: |
         export PATH="$PATH:$HOME/bin"
-        for version in  "3.6" "3.7" "3.8" ; do
-          PIP=pip${version} PYTHON=python${version} ./install_tf_and_build_all_whl.sh
-        done
+        PIP=pip${{ matrix.python-version }} PYTHON=python${{ matrix.python-version }} \
+          ./install_tf_and_build_all_whl.sh
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
@@ -46,7 +50,7 @@ jobs:
           auditwheel repair --plat manylinux2014_x86_64 artifacts/$whl -w wheelhouse
         done;
         if [[ "1" == "${{ github.event.inputs.upload_pypi }}" ]] ; then
-          python3.8 -m twine upload wheelhouse/*
+          python${{ matrix.python-version }} -m twine upload wheelhouse/*
         fi
 
 
