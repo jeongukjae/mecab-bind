@@ -24,15 +24,15 @@ jobs:
         curl -LO https://github.com/bazelbuild/bazel/releases/download/${BAZEL_VERSION}/bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh
         chmod +x bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh
         ./bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh --user
-        export PATH="$PATH:$HOME/bin"
         rm bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh
-    - name: Install twine and setup
+    - name: Install deps
       run: |
         python3.8 -m pip install --upgrade pip
         pip3.8 install twine
-        ./third_party/tf/patch_auditwheel.sh
+        yum install -y patchelf rsync
     - name: Build wheel
       run: |
+        export PATH="$PATH:$HOME/bin"
         for version in  "3.6" "3.7" "3.8" ; do
           PIP=pip${version} PYTHON=python${version} ./install_tf_and_build_all_whl.sh
         done
@@ -41,6 +41,7 @@ jobs:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
+        ./third_party/tf/patch_auditwheel.sh
         for whl in `ls artifacts`; do
           auditwheel repair --plat manylinux2014_x86_64 artifacts/$whl -w wheelhouse
         done;
