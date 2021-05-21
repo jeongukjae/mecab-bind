@@ -18,7 +18,14 @@
 # I modified this script not to use CUDA settings for this project.
 #
 PLATFORM="$(uname -s | tr 'A-Z' 'a-z')"
-PIP="pip3"
+
+if [[ -z ${PIP} ]]; then
+  PIP="pip3"
+fi
+
+if [[ -z ${PYTHON} ]]; then
+  PYTHON="python3"
+fi
 
 function write_to_bazelrc() {
   echo "$1" >> .bazelrc
@@ -67,8 +74,8 @@ else
 fi
 
 
-TF_CFLAGS=( $(python3 -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
-TF_LFLAGS="$(python3 -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))')"
+TF_CFLAGS=( $(${PYTHON} -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_compile_flags()))') )
+TF_LFLAGS="$(${PYTHON} -c 'import tensorflow as tf; print(" ".join(tf.sysconfig.get_link_flags()))')"
 
 write_to_bazelrc "build -c opt"
 

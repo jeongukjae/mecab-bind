@@ -125,3 +125,5 @@ dmypy.json
 /python/mecab/libmecab.so.2
 /python/mecab/libmecab.a
 /artifacts
+/wheelhouse
+/.tmp-py-bin
