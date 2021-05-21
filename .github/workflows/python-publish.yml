@@ -28,8 +28,8 @@ jobs:
         rm bazel-${BAZEL_VERSION}-installer-${BAZEL_TARGET}-x86_64.sh
     - name: Install twine and setup
       run: |
-        python -m pip install --upgrade pip
-        pip install twine
+        python3.8 -m pip install --upgrade pip
+        pip3.8 install twine
         ./third_party/tf/patch_auditwheel.sh
     - name: Build wheel
       run: |
