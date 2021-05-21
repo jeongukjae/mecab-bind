@@ -113,3 +113,7 @@ TensorShape([2, None])
 
 Note: If you use this Module in SavedModel format, it is recommended to use model_path as absolute path.
       The `model_path` is serialized, not the dictionary data.
+
+## Prebuilt dictionaries
+
+* [prebuilt mecab-ko-dic (korean)](https://github.com/jeongukjae/mecab-ko-dic-prebuilt) and [example notebook](https://github.com/jeongukjae/mecab-ko-dic-prebuilt/blob/main/example-of-mecab-ko-dic-prebuilt--and-mecab-tf.ipynb)
