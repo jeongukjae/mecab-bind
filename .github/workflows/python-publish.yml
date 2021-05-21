@@ -46,7 +46,7 @@ jobs:
           auditwheel repair --plat manylinux2014_x86_64 artifacts/$whl -w wheelhouse
         done;
         if [[ "1" == "${{ github.event.inputs.upload_pypi }}" ]] ; then
-          twine upload wheelhouse/*
+          python3.8 -m twine upload wheelhouse/*
         fi
 
 

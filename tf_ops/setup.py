@@ -23,7 +23,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'),
 
 setup(
     name="mecab-tf",
-    version="0.996.0a1",
+    version="0.996.0a2",
     python_requires=">=3.6",
     packages=find_packages(),
     url="https://github.com/jeongukjae/python-bind",
@@ -37,6 +37,7 @@ setup(
     cmdclass={'install': InstallPlatlib},
     classifiers=[
         "Development Status :: 3 - Alpha",
+        "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
         "Programming Language :: C++",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.6",
