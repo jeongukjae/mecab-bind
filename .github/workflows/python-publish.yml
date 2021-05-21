@@ -10,6 +10,7 @@ on:
 
 jobs:
   deploy_linux:
+    runs-on: ubuntu-latest
     container: quay.io/pypa/manylinux2014_x86_64
     env:
       BAZEL_VERSION: 4.0.0
