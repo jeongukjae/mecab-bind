@@ -89,15 +89,14 @@ public:
         return results;
     }
 
-    const std::vector<std::vector<Node>> parse_nbest_with_lattice(const std::string& input_sentence) {
+    const std::vector<std::vector<Node>> parse_nbest_with_lattice(const std::string& input_sentence, const size_t max_nbest_size) {
         MeCab::Lattice *lattice = model->createLattice();
         lattice->set_request_type(MECAB_NBEST);
         lattice->set_sentence(input_sentence.c_str());
         CHECK_MECAB_ERROR(tagger->parse(lattice));
 
         std::vector<std::vector<Node>> results;
-        // TODO NBEST SIZE
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < max_nbest_size; ++i) {
             const MeCab::Node* node = lattice->bos_node();
             CHECK_MECAB_ERROR(node);
 

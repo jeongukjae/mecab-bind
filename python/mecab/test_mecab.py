@@ -28,7 +28,7 @@ class TestMecabTagger(unittest.TestCase):
 
     def test_parse_nbest_with_lattice(self):
         tagger = mecab.Tagger(mecab.get_model_args("./test-data/dic"))
-        node = tagger.parse_nbest_with_lattice("シリーズ中、カンフーシーンが一番多い。")
+        node = tagger.parse_nbest_with_lattice("シリーズ中、カンフーシーンが一番多い。", 10)
         del tagger
 
         self.assertEqual(len(node), 10)

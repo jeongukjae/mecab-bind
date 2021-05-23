@@ -41,7 +41,7 @@ Binding MeCab Tagger to python and tensorflow
     <Node surface="。", feature="記号,句点,*,*,*,*,。,。,。">,
     <Node surface="", feature="BOS/EOS,*,*,*,*,*,*,*,*">
 ]
->>> tagger.parse_nbest_with_lattice("シリーズ中、カンフーシーンが一番多い。")
+>>> tagger.parse_nbest_with_lattice("シリーズ中、カンフーシーンが一番多い。", 10)
 [
     [
         <Node surface="", feature="BOS/EOS,*,*,*,*,*,*,*,*">,
