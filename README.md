@@ -1,7 +1,7 @@
 # mecab-bind
 
-* [mecab-bind](https://pypi.org/project/mecab-bind/): ![PyPI](https://img.shields.io/pypi/v/mecab-bind)
-* [mecab-tf](https://pypi.org/project/mecab-tf/): ![PyPI](https://img.shields.io/pypi/v/mecab-tf)
+* [mecab-bind](https://pypi.org/project/mecab-bind/): ![PyPI](https://img.shields.io/pypi/v/mecab-bind) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mecab-bind)
+* [mecab-tf](https://pypi.org/project/mecab-tf/): ![PyPI](https://img.shields.io/pypi/v/mecab-tf) ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/mecab-tf)
 
 [![Build and test binding modules](https://github.com/jeongukjae/mecab-bind/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/jeongukjae/mecab-bind/actions/workflows/build-and-test.yml)
 
