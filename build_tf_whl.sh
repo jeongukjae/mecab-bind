@@ -3,10 +3,6 @@
 set -e
 set -x
 
-if [[ -z ${PIP} ]]; then
-  PIP="pip3"
-fi
-
 if [[ -z ${PYTHON} ]]; then
   PYTHON="python3"
 fi
@@ -19,8 +15,8 @@ mkdir -p .tmp-py-bin
 rm -f .tmp-py-bin/python3
 ln -s `which $PYTHON` .tmp-py-bin/python3
 
-$PIP install tensorflow-cpu==${TF_VERSION}
-PIP=$PIP PYTHON=$PYTHON ./tf_configure.sh
+$PYTHON -m pip install tensorflow-cpu==${TF_VERSION}
+PIP="$PYTHON -m pip" PYTHON=$PYTHON ./tf_configure.sh
 bazel build -s \
     --action_env=PATH=$PATH:`pwd`/.tmp-py-bin \
     //tf_ops:build_pip_pkg \

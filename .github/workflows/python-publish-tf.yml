@@ -38,7 +38,7 @@ jobs:
     - name: Build wheel
       run: |
         export PATH="$PATH:$HOME/bin"
-        PIP=pip${{ matrix.python-version }} PYTHON=python${{ matrix.python-version }} ./build_tf_whl.sh
+        PYTHON=python${{ matrix.python-version }} ./build_tf_whl.sh
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}

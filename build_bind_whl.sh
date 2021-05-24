@@ -3,10 +3,6 @@
 set -e
 set -x
 
-if [[ -z ${PIP} ]]; then
-  PIP="pip3"
-fi
-
 if [[ -z ${PYTHON} ]]; then
   PYTHON="python3"
 fi

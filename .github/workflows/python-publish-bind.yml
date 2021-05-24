@@ -32,12 +32,12 @@ jobs:
     - name: Install deps
       run: |
         python${{ matrix.python-version }} -m pip install --upgrade pip
-        pip${{ matrix.python-version }} install twine
+        python${{ matrix.python-version }} -m pip install twine
         yum install -y patchelf rsync
     - name: Build wheel
       run: |
         export PATH="$PATH:$HOME/bin"
-        PIP=pip${{ matrix.python-version }} PYTHON=python${{ matrix.python-version }} ./build_bind_whl.sh
+        PYTHON=python${{ matrix.python-version }} ./build_bind_whl.sh
     - name: Build and publish
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
