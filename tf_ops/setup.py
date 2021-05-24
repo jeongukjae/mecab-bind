@@ -23,7 +23,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'),
 
 setup(
     name="mecab-tf",
-    version="0.996.0a3",
+    version="2.4.0",
     python_requires=">=3.6",
     packages=find_packages(),
     url="https://github.com/jeongukjae/python-bind",
