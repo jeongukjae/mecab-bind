@@ -16,7 +16,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest, ubuntu-latest]
-        python-version: [3.6, 3.7, 3.8]
+        python-version: [3.6, 3.7, 3.8, 3.9]
         include:
           - os: macos-latest
             bazel-target: darwin
@@ -51,11 +51,6 @@ jobs:
         bazel build -s //python/mecab:test_mecab --verbose_failures
         ./bazel-bin/python/mecab/test_mecab
 
-    - name: Build and test tensorflow binding
-      run: |
-        bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
-        ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test
-
     - name: Build python binding pip pkg and test
       run: |
         bazel build -s //python:build_pip_pkg --verbose_failures
@@ -69,7 +64,14 @@ jobs:
           mecab --help
         fi
 
+    - name: Build and test tensorflow binding
+      if: matrix.python-version != 3.9
+      run: |
+        bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
+        ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test
+
     - name: Build tensorflow binding pip pkg and test
+      if: matrix.python-version != 3.9
       run: |
         bazel build -s //tf_ops:build_pip_pkg --verbose_failures
         ./bazel-bin/tf_ops/build_pip_pkg artifacts
