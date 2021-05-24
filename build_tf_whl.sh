@@ -24,8 +24,6 @@ PIP=$PIP PYTHON=$PYTHON ./tf_configure.sh
 bazel build -s \
     --action_env=PATH=$PATH:`pwd`/.tmp-py-bin \
     //tf_ops:build_pip_pkg \
-    //python:build_pip_pkg \
     --verbose_failures
 
 PATH=$PATH:`pwd`/.tmp-py-bin ./bazel-bin/tf_ops/build_pip_pkg artifacts
-PATH=$PATH:`pwd`/.tmp-py-bin ./bazel-bin/python/build_pip_pkg artifacts
