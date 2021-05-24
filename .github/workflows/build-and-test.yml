@@ -41,7 +41,9 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        pip3 install tensorflow-cpu==${TENSORFLOW_VERSION}
+        if [[ "${{ matrix.python-version }}" != "3.9" ]] ; then
+          pip3 install tensorflow-cpu==${TENSORFLOW_VERSION}
+        fi
 
     - name: Set up workspace
       run: ./tf_configure.sh
