@@ -48,9 +48,7 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        if [[ "${{ matrix.python-version }}" != "3.9" ]] ; then
-          pip3 install tensorflow-cpu==${TENSORFLOW_VERSION}
-        fi
+        pip3 install tensorflow-cpu==${TENSORFLOW_VERSION}
 
     - name: Set up workspace
       run: ./tf_configure.sh
@@ -74,13 +72,11 @@ jobs:
         fi
 
     - name: Build and test tensorflow binding
-      if: matrix.python-version != 3.9
       run: |
         bazel build -s //tf_ops/mecab_tf:mecab_ops_py_test --verbose_failures
         ./bazel-bin/tf_ops/mecab_tf/mecab_ops_py_test
 
     - name: Build tensorflow binding pip pkg and test
-      if: matrix.python-version != 3.9
       run: |
         bazel build -s //tf_ops:build_pip_pkg --verbose_failures
         ./bazel-bin/tf_ops/build_pip_pkg artifacts
