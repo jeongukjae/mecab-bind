@@ -23,7 +23,7 @@ with open(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'README.md'),
 
 setup(
     name="mecab-bind",
-    version="0.996.0a4",
+    version="0.996.0a5",
     python_requires=">=3.6",
     packages=find_packages(),
     entry_points = {
