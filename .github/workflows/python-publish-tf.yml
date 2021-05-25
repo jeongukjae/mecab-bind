@@ -14,7 +14,7 @@ jobs:
     container: quay.io/pypa/manylinux2014_x86_64
     env:
       BAZEL_VERSION: 4.0.0
-      TENSORFLOW_VERSION: 2.4.1
+      TENSORFLOW_VERSION: 2.5.0
       BAZEL_TARGET: linux
 
     strategy:
@@ -57,7 +57,7 @@ jobs:
     runs-on: macos-latest
     env:
       BAZEL_VERSION: 4.0.0
-      TENSORFLOW_VERSION: 2.4.1
+      TENSORFLOW_VERSION: 2.5.0
       BAZEL_TARGET: darwin
 
     strategy:

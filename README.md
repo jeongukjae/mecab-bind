@@ -17,6 +17,7 @@ Binding MeCab Tagger to python and tensorflow
 |mecab-tf|tensorflow version|python version|
 |---|---|---|
 |2.4.0|2.4.x|3.6, 3.7, 3.8|
+|2.5.0|2.5.x|3.6, 3.7, 3.8, 3.9|
 
 ## Usage
 

@@ -8,7 +8,7 @@ if [[ -z ${PYTHON} ]]; then
 fi
 
 if [[ -z ${TF_VERSION} ]]; then
-  TF_VERSION="2.4.1"
+  TF_VERSION="2.5.0"
 fi
 
 mkdir -p .tmp-py-bin

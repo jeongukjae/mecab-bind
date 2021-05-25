@@ -10,7 +10,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     env:
       BAZEL_VERSION: 4.0.0
-      TENSORFLOW_VERSION: 2.4.1
+      TENSORFLOW_VERSION: 2.5.0
 
     strategy:
       fail-fast: false
