@@ -33,7 +33,7 @@ jobs:
     - name: Install deps
       run: |
         python${{ matrix.python-version }} -m pip install --upgrade pip
-        pip${{ matrix.python-version }} install twine
+        python${{ matrix.python-version }} -m pip install twine
         yum install -y patchelf rsync
     - name: Build wheel
       run: |
